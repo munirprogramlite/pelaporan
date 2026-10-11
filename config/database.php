@@ -1,12 +1,16 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_pelaporan_kegiatan";
+// config/database.php
+date_default_timezone_set('Asia/Jakarta');
 
-$koneksi = mysqli_connect($host, $user, $pass, $db);
+$host = 'localhost';
+$dbname = 'db_pelaporan_kegiatan';
+$user = 'root';
+$pass = '';
 
-if (!$koneksi) {
-    die("Koneksi database gagal: " . mysqli_connect_error());
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Koneksi gagal: " . $e->getMessage());
 }
 ?>
